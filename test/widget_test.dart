@@ -24,6 +24,47 @@ void main() {
     expect(find.text('提案検索 画面'), findsOneWidget);
   });
 
+  testWidgets('sidebar routes to each feature skeleton screen', (tester) async {
+    tester.view.physicalSize = const Size(1000, 800);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await tester.pumpWidget(const MyApp());
+
+    await tester.tap(find.text('処理中').first);
+    await tester.pumpAndSettle();
+    expect(find.text('処理中 画面'), findsOneWidget);
+
+    await tester.tap(find.text('完了・終了').first);
+    await tester.pumpAndSettle();
+    expect(find.text('完了・終了 画面'), findsOneWidget);
+
+    await tester.tap(find.text('提案検索').first);
+    await tester.pumpAndSettle();
+    expect(find.text('提案検索 画面'), findsOneWidget);
+
+    await tester.tap(find.text('要対応').first);
+    await tester.pumpAndSettle();
+    expect(find.text('要対応 画面'), findsOneWidget);
+
+    await tester.tap(find.text('お知らせ').first);
+    await tester.pumpAndSettle();
+    expect(find.text('お知らせ 画面'), findsOneWidget);
+
+    await tester.tap(find.text('事務局').first);
+    await tester.pumpAndSettle();
+    expect(find.text('事務局 画面'), findsOneWidget);
+
+    await tester.tap(find.text('通知設定').first);
+    await tester.pumpAndSettle();
+    expect(find.text('通知設定 画面'), findsOneWidget);
+
+    await tester.tap(find.text('利用者設定').first);
+    await tester.pumpAndSettle();
+    expect(find.text('利用者設定 画面'), findsOneWidget);
+  });
+
   testWidgets('desktop sidebar stays beside the content without a barrier', (
     tester,
   ) async {

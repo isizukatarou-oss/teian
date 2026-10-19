@@ -4,6 +4,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/app/main_layout_screen.dart';
 import 'package:flutter_project/app/route_paths.dart';
+import 'package:flutter_project/core/constants/constants.dart';
+import 'package:flutter_project/features/auth/presentation/pages/auth_page.dart';
+import 'package:flutter_project/features/kansa/presentation/pages/kansa_page.dart';
+import 'package:flutter_project/features/review/presentation/pages/review_page.dart';
+import 'package:flutter_project/features/teian/presentation/pages/teian_page.dart';
 
 /// URL形式のパスと、表示する画面Widgetの対応を管理する。
 class AppRouter {
@@ -13,8 +18,48 @@ class AppRouter {
 
   /// [MaterialApp] に渡す画面一覧。画面追加時はここにパスを登録する。
   static Map<String, WidgetBuilder> get routes => {
-        //_はルートから渡される引数だが、この画面では使わないので、省略を示す名前になっている
-        RoutePaths.home: (_) => const MainLayoutScreen(),
+        RoutePaths.home: (_) => const MainLayoutScreen(
+              currentTitle: AppConstants.needsAction,
+              currentParentCategory: AppConstants.proposalList,
+              content: TeianPage(title: AppConstants.needsAction),
+            ),
+        RoutePaths.needsAction: (_) => const MainLayoutScreen(
+              currentTitle: AppConstants.needsAction,
+              currentParentCategory: AppConstants.proposalList,
+              content: TeianPage(title: AppConstants.needsAction),
+            ),
+        RoutePaths.inProgress: (_) => const MainLayoutScreen(
+              currentTitle: AppConstants.inProgress,
+              currentParentCategory: AppConstants.proposalList,
+              content: TeianPage(title: AppConstants.inProgress),
+            ),
+        RoutePaths.completed: (_) => const MainLayoutScreen(
+              currentTitle: AppConstants.completed,
+              currentParentCategory: AppConstants.proposalList,
+              content: TeianPage(title: AppConstants.completed),
+            ),
+        RoutePaths.proposalSearch: (_) => const MainLayoutScreen(
+              currentTitle: AppConstants.proposalSearch,
+              content: TeianPage(title: AppConstants.proposalSearch),
+            ),
+        RoutePaths.notifications: (_) => const MainLayoutScreen(
+              currentTitle: AppConstants.notifications,
+              content: ReviewPage(title: AppConstants.notifications),
+            ),
+        RoutePaths.administration: (_) => const MainLayoutScreen(
+              currentTitle: AppConstants.administration,
+              content: KansaPage(title: AppConstants.administration),
+            ),
+        RoutePaths.notificationSettings: (_) => const MainLayoutScreen(
+              currentTitle: AppConstants.notificationSettings,
+              currentParentCategory: AppConstants.settings,
+              content: AuthPage(title: AppConstants.notificationSettings),
+            ),
+        RoutePaths.userSettings: (_) => const MainLayoutScreen(
+              currentTitle: AppConstants.userSettings,
+              currentParentCategory: AppConstants.settings,
+              content: AuthPage(title: AppConstants.userSettings),
+            ),
       };
 }
 

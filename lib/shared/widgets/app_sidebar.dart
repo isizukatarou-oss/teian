@@ -1,6 +1,7 @@
 // 処理フロー: app/main_layout_screen.dart -> このファイル -> メニュー操作を通知。
 // 選択された項目はコールバックで共通画面枠へ返す。
 import 'package:flutter/material.dart';
+import 'package:flutter_project/app/route_paths.dart';
 import 'package:flutter_project/core/constants/constants.dart';
 
 /// 現在の画面を選択状態で示し、メニュー選択を画面枠へ通知する。
@@ -15,7 +16,11 @@ class AppSidebar extends StatelessWidget {
   final String currentTitle;
 
   /// 選択した画面名と、パンくず用の親カテゴリを画面枠へ渡すコールバック。
-  final void Function(String title, {String parentCategory}) onNavigate;
+  final void Function(
+    String title, {
+    String parentCategory,
+    required String routePath,
+  }) onNavigate;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +51,7 @@ class AppSidebar extends StatelessWidget {
               onTap: () => onNavigate(
                 AppConstants.needsAction,
                 parentCategory: AppConstants.proposalList,
+                routePath: RoutePaths.needsAction,
               ),
             ),
             ListTile(
@@ -57,6 +63,7 @@ class AppSidebar extends StatelessWidget {
               onTap: () => onNavigate(
                 AppConstants.inProgress,
                 parentCategory: AppConstants.proposalList,
+                routePath: RoutePaths.inProgress,
               ),
             ),
             ListTile(
@@ -68,6 +75,7 @@ class AppSidebar extends StatelessWidget {
               onTap: () => onNavigate(
                 AppConstants.completed,
                 parentCategory: AppConstants.proposalList,
+                routePath: RoutePaths.completed,
               ),
             ),
           ],
@@ -75,17 +83,28 @@ class AppSidebar extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.search),
           title: const Text(AppConstants.proposalSearch),
-          onTap: () => onNavigate(AppConstants.proposalSearch),
+          onTap: () => onNavigate(
+            AppConstants.proposalSearch,
+            routePath: RoutePaths.proposalSearch,
+          ),
         ),
         ListTile(
           leading: const Icon(Icons.notifications),
           title: const Text(AppConstants.notifications),
-          onTap: () => onNavigate(AppConstants.notifications),
+          selected: currentTitle == AppConstants.notifications,
+          onTap: () => onNavigate(
+            AppConstants.notifications,
+            routePath: RoutePaths.notifications,
+          ),
         ),
         ListTile(
           leading: const Icon(Icons.business),
           title: const Text(AppConstants.administration),
-          onTap: () => onNavigate(AppConstants.administration),
+          selected: currentTitle == AppConstants.administration,
+          onTap: () => onNavigate(
+            AppConstants.administration,
+            routePath: RoutePaths.administration,
+          ),
         ),
         const Divider(),
         ExpansionTile(
@@ -102,6 +121,7 @@ class AppSidebar extends StatelessWidget {
               onTap: () => onNavigate(
                 AppConstants.notificationSettings,
                 parentCategory: AppConstants.settings,
+                routePath: RoutePaths.notificationSettings,
               ),
             ),
             ListTile(
@@ -113,6 +133,7 @@ class AppSidebar extends StatelessWidget {
               onTap: () => onNavigate(
                 AppConstants.userSettings,
                 parentCategory: AppConstants.settings,
+                routePath: RoutePaths.userSettings,
               ),
             ),
           ],

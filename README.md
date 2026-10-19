@@ -22,13 +22,19 @@ lib/
 │   └── widgets/
 │       └── app_sidebar.dart    # 機能間で共有するサイドバーUI
 └── features/
-    ├── auth/            # 認証機能
-    ├── teian/           # 提案機能
-    ├── review/          # レビュー機能
-    └── kansa/           # 監査機能
+    ├── auth/
+    │   └── presentation/pages/  # 認証・利用者設定画面
+    ├── teian/
+    │   └── presentation/pages/  # 提案一覧・検索画面
+    ├── review/
+    │   └── presentation/pages/  # お知らせ画面
+    └── kansa/
+        └── presentation/pages/  # 事務局画面
 ```
 
 各 feature は `presentation/`、`domain/`、`data/` に分け、画面・ビジネスロジック・データアクセスを整理します。アプリの起動・ルーティング・テーマと全体レイアウトは基盤として `app/` に置きます。複数featureから使う共通UIやモデルは `shared/` に置きます。
+
+サイドバーの各項目は `app/route_paths.dart` の名前付きルートから各 feature の `presentation/pages/` に遷移します。画面の共通レイアウトは遷移後も維持されます。
 
 ## コーディングルール
 
