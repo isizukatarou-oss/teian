@@ -14,3 +14,4 @@ void main() {
 //MyAppはapp.dartに定義されていて、テーマや画面ルートなどのアプリ全体の設計を担当
 //constは可能な場合にWidgetを再利用できるようにする指定
 //widgets.dartはrunAppなど、Flutterの基本的なWidget APIを提供するパッケージ
+aaa
